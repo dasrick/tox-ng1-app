@@ -29,17 +29,26 @@ Inside of Angular use camel case (TheFunnyController) for internal names.
 
 Usage of following stuff ...
 
+LESS/CSS
+
 * less
 * autoprefixer
 * bootstrap
 * font-awesome
+
+JS
+
+* jscs (maybe inside of webpack ... later)
+* jshint (maybe inside of webpack ... later)
+* ng-anotate
+* unit tests based on karma, jasmine and phantomjs
 * advanced routing
 * translation (incl. browser language detection)
 * usage of Angular Resource
 * usage of Angular Cache
 * usage of Angular Formly (great lib to manage forms)
 * one folder (`web`) for deployment (excl. all src and build stuff)
-* unit tests based on karma, jasmine and phantomjs
+
 
 
 ## Usage
