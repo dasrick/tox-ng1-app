@@ -39,6 +39,17 @@ Usage of following stuff ...
 * unit tests based on karma, jasmine and phantomjs
 
 
+## Usage
+
+Run local with [npm](https://www.npmjs.com/)
+
+```sh
+$ npm run start
+```
+
+This web server will be reachable at [localhost:10001](http://localhost:10001)
+
+
 ## Contributing
 
 1. Fork it
