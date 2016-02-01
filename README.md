@@ -27,6 +27,8 @@ Inside of Angular use camel case (TheFunnyController) for internal names.
 
 ## Features
 
+Usage of following stuff ...
+
 * bootstrap
 * advanced routing
 * translation (incl. browser language detection)
