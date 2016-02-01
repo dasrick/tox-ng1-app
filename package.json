@@ -15,12 +15,19 @@
   "homepage": "https://github.com/dasrick/tox-ng1-app#readme",
   "dependencies": {
     "angular": "^1.4.9",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "json-loader": "^0.5.4",
+    "ng-annotate-webpack-plugin": "^0.1.2",
+    "webpack": "^1.12.12"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.9"
   },
   "scripts": {
+    "postinstall": "npm run build",
+    "prebuild": "mkdir -p web/css/ web/i18n/ web/js/ web/views/",
+    "build": "npm run build:js",
+    "build:js": "webpack --config webpack.config.js",
     "start": "node web.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
