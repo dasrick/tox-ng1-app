@@ -15,8 +15,13 @@
   "homepage": "https://github.com/dasrick/tox-ng1-app#readme",
   "dependencies": {
     "angular": "^1.4.9",
+    "bootstrap": "^3.3.6",
+    "clean-css": "^3.4.9",
     "express": "^4.13.4",
+    "font-awesome": "^4.5.0",
     "json-loader": "^0.5.4",
+    "less": "^2.6.0",
+    "less-plugin-autoprefix": "^1.5.1",
     "ng-annotate-webpack-plugin": "^0.1.2",
     "webpack": "^1.12.12"
   },
@@ -25,8 +30,11 @@
   },
   "scripts": {
     "postinstall": "npm run build",
-    "prebuild": "mkdir -p web/css/ web/i18n/ web/js/ web/views/",
-    "build": "npm run build:js",
+    "prebuild": "mkdir -p web/css/ web/i18n/ web/js/ web/views/ web/fonts/font-awesome",
+    "build": "npm run build:fonts && npm run build:css && npm run build:js",
+    "build:css": "lessc --autoprefix='last 2 versions,ie 9' src/media/less/style.less web/css/style.css && cleancss --source-map -o web/css/style.min.css web/css/style.css",
+    "build:fonts": "npm run build:font-fontawesome",
+    "build:font-fontawesome": "cp -R node_modules/font-awesome/fonts/* web/fonts/font-awesome",
     "build:js": "webpack --config webpack.config.js",
     "start": "node web.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -29,7 +29,10 @@ Inside of Angular use camel case (TheFunnyController) for internal names.
 
 Usage of following stuff ...
 
+* less
+* autoprefixer
 * bootstrap
+* font-awesome
 * advanced routing
 * translation (incl. browser language detection)
 * usage of Angular Resource
