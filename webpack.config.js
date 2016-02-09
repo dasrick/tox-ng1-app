@@ -3,7 +3,8 @@
 // modules /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var webpack = require('webpack');
 var path = require('path');
-var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var NgAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // pathes //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var srcPath = path.resolve(__dirname, 'src', 'app.js');
@@ -32,16 +33,25 @@ var config = {
     new webpack.DefinePlugin({
       'process.env': {
     //    'NODE_ENV': JSON.stringify(nodeEnv),
-        'appversion': JSON.stringify(require('./package.json').version),
+        'appversion': JSON.stringify(require('./package.json').version)
     //    'apiUrl': JSON.stringify(apiUrl)
       }
     }),
-    new ngAnnotatePlugin({add: true}),
+    new NgAnnotatePlugin({add: true}),
     new webpack.optimize.UglifyJsPlugin(
       {compress: {warnings: false}}
     ),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.DedupePlugin(),
+    // START copy font awesome
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'node_modules', 'font-awesome', 'fonts'),
+        to: path.resolve(__dirname, '..', 'fonts', 'font-awesome'),
+        toType: 'file'
+      }
+    ])
+    // END copy font awesome
   ]
 };
 
