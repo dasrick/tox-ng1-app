@@ -45,5 +45,6 @@
   "requireSpacesInFunction": {
     "beforeOpeningCurlyBrace": true
   },
-  "validateLineBreaks": "LF"
+//  "validateLineBreaks": "LF"  // f**k of because of azure
+  "validateLineBreaks": null
 }
