@@ -1,8 +1,6 @@
 {
   "excludeFiles": [
-    "src/ngLocale/**",
     "node_modules/**",
-    "scripts/**",
     "web/**"
   ],
   "disallowKeywords": ["with"],
@@ -32,7 +30,7 @@
   "disallowTrailingComma": true,
   "disallowTrailingWhitespace": true,
   "requireCommaBeforeLineBreak": true,
-//  "requireLineFeedAtFileEnd": true,
+  "requireLineFeedAtFileEnd": true,
   "requireSpaceAfterBinaryOperators": ["?", ":", "+", "-", "/", "*", "%", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "&&", "||"],
   "requireSpaceBeforeBinaryOperators": ["?", ":", "+", "-", "/", "*", "%", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "&&", "||"],
   "requireSpaceAfterKeywords": ["if", "else", "for", "while", "do", "switch", "return", "try", "catch"],
