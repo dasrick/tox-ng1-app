@@ -15,9 +15,10 @@
   "homepage": "https://github.com/dasrick/tox-ng1-app#readme",
   "dependencies": {
     "angular": "^1.4.9",
+    "autoprefixer": "^6.3.1",
     "bootstrap": "^3.3.6",
-    "clean-css": "^3.4.9",
     "copy-webpack-plugin": "^1.1.1",
+    "css-loader": "^0.23.1",
     "express": "^4.13.4",
     "font-awesome": "^4.5.0",
     "jscs": "^2.9.0",
@@ -25,8 +26,10 @@
     "jshint-stylish": "^2.1.0",
     "json-loader": "^0.5.4",
     "less": "^2.6.0",
-    "less-plugin-autoprefix": "^1.5.1",
+    "less-loader": "^2.2.2",
     "ng-annotate-webpack-plugin": "^0.1.2",
+    "postcss-loader": "^0.8.0",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.12"
   },
   "devDependencies": {
@@ -34,8 +37,7 @@
   },
   "scripts": {
     "postinstall": "npm run build",
-    "build": "npm run build:css && npm run jscs && npm run jshint && npm run build:js",
-    "build:css": "lessc --autoprefix='last 2 versions,ie 9' src/media/less/style.less web/css/style.css && cleancss --source-map -o web/css/style.min.css web/css/style.css",
+    "build": "npm run jscs && npm run jshint && npm run build:js",
     "build:js": "webpack --config webpack.config.js",
     "jscs": "jscs ./src ./test",
     "jshint": "jshint ./src ./test --reporter node_modules/jshint-stylish/index.js",

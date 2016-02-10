@@ -5,6 +5,7 @@ var webpack = require('webpack');
 var path = require('path');
 var NgAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 // pathes //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var srcPath = path.resolve(__dirname, 'src', 'app.js');
@@ -26,32 +27,61 @@ var config = {
       {
         test: /\.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!postcss-loader?pack=cleaner!less-loader'
+        //loader: 'style/useable!css?sourceMap!autoprefixer?browsers=last 2 version!less-loader?sourceMap=true'
+      //},
+
       }
     ]
   },
+  postcss: function () {
+    return {
+      //defaults: [autoprefixer, precss],
+      defaults: [autoprefixer({ browsers: ['last 2 version'] })],
+      cleaner:  [autoprefixer({ browsers: ['last 2 version'] })]
+    };
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-    //    'NODE_ENV': JSON.stringify(nodeEnv),
-        'appversion': JSON.stringify(require('./package.json').version)
-    //    'apiUrl': JSON.stringify(apiUrl)
-      }
-    }),
     new NgAnnotatePlugin({add: true}),
     new webpack.optimize.UglifyJsPlugin(
       {compress: {warnings: false}}
     ),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    // START copy font awesome
+
     new CopyWebpackPlugin([
+      // copy font awesome
       {
         from: path.resolve(__dirname, 'node_modules', 'font-awesome', 'fonts'),
-        to: path.resolve(__dirname, '..', 'fonts', 'font-awesome'),
+        to: path.resolve(__dirname, '..', 'fonts'),
         toType: 'file'
+      },
+      {
+        from: path.resolve(__dirname, 'node_modules', 'font-awesome', 'css'),
+        to: path.resolve(__dirname, '..', 'css'),
+        toType: 'file'
+      },
+      // copy bootstrap - js not ness, just include angular-ui-bootstrap
+      {
+        from: path.resolve(__dirname, 'node_modules', 'bootstrap', 'dist', 'fonts'),
+        to: path.resolve(__dirname, '..', 'fonts'),
+        toType: 'file'
+      },
+      {
+        from: path.resolve(__dirname, 'node_modules', 'bootstrap', 'dist', 'css'),
+        to: path.resolve(__dirname, '..', 'css'),
+        toType: 'file'
+      //},
+      //{
+      //  from: path.resolve(__dirname, 'node_modules', 'bootstrap', 'dist', 'js'),
+      //  to: path.resolve(__dirname, '..', 'js'),
+      //  toType: 'file'
       }
     ])
-    // END copy font awesome
+
   ]
 };
 
