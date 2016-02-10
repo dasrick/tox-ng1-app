@@ -6,6 +6,7 @@ var path = require('path');
 var NgAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // pathes //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var srcPath = path.resolve(__dirname, 'src', 'app.js');
@@ -28,12 +29,22 @@ var config = {
         test: /\.json$/,
         loader: 'json-loader'
       },
+      //{
+      //  test: /\.less$/,
+      //  loader: 'style-loader!css-loader!postcss-loader?pack=cleaner!less-loader'
+      //  //loader: 'style/useable!css?sourceMap!autoprefixer?browsers=last 2 version!less-loader?sourceMap=true'
+      ////},
+      //
+      //},
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader?pack=cleaner')
+      },
+      // Optionally extract less files
+      // or any other compile-to-css language
       {
         test: /\.less$/,
-        loader: 'style-loader!css-loader!postcss-loader?pack=cleaner!less-loader'
-        //loader: 'style/useable!css?sourceMap!autoprefixer?browsers=last 2 version!less-loader?sourceMap=true'
-      //},
-
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader?pack=cleaner!less-loader')
       }
     ]
   },
@@ -45,6 +56,10 @@ var config = {
     };
   },
   plugins: [
+    new ExtractTextPlugin('../css/style.min.css', {
+      allChunks: true
+    }),
+
     new NgAnnotatePlugin({add: true}),
     new webpack.optimize.UglifyJsPlugin(
       {compress: {warnings: false}}
